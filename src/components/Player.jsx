@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Player({initalname ,symbole}){
+export default function Player({initalname ,symbole,isActive,onchangeName}){
     const [name,setName]=useState(initalname)
     const [isClicked,setisClicked]=useState(false)
     
@@ -8,7 +8,10 @@ export default function Player({initalname ,symbole}){
         setName(event.target.value)
     }
     function changeContent(){
-        setisClicked(editing=>!editing)
+        setisClicked((editing)=>!editing)
+     if(isClicked){
+        onchangeName(symbole,name)
+     }
     }
     
 
@@ -20,7 +23,7 @@ export default function Player({initalname ,symbole}){
 
     return (
     <>
-        <li>
+        <li className={isActive?'active':undefined}>
             <span className="player">
                 {playerName}
                 <span className="player-symbole">{symbole}</span>
